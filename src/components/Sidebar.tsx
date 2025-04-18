@@ -19,15 +19,15 @@ import { ActionIcon } from './shared/ActionIcon';
 // Using the standardized ConnectorLogo component from shared
 
 const Sidebar = () => {
-  const [activeNav, setActiveNav] = useState('core');
+  const [activeNav, setActiveNav] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false);
   const [isLibraryModalOpen, setIsLibraryModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<any | null>(null);
-  const [expandedSubgroups, setExpandedSubgroups] = useState<{ [key: string]: boolean }>({});
+  const [expandedModules, setExpandedModules] = useState<string[]>([]);
+  
   const [selectedLibraryCategory, setSelectedLibraryCategory] = useState<string | null>(null);
-  const [selectedLibraryTab, setSelectedLibraryTab] = useState<'core' | 'connectors'>('core');
+  const [selectedLibraryTab, setSelectedLibraryTab] = useState<'all' | 'core' | 'connectors'>('core');
   
   // Search state
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -80,55 +80,26 @@ const Sidebar = () => {
   // Group connectors by publisher
   const appActions = useMemo(() => {
     if (connectorActions.length === 0) return [];
-    
-    // Get all modules from connector actions
-    const allModules = connectorActions.flatMap(source => 
-      source.categories.flatMap(category => category.modules)
+
+    // Get all modules from connector actions, and add source: 'Connector' to each
+    const allModules = connectorActions.flatMap(source =>
+      source.categories.flatMap(category =>
+        category.modules.map(module => ({ ...module, source: 'Connector' }))
+      )
     );
-    
-    // Group modules by publisher
-    const microsoftModules = allModules
-      .filter(module => module.publisher === 'Microsoft')
-      .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
-      
-    const thirdPartyModules = allModules
-      .filter(module => module.publisher !== 'Microsoft' && module.publisher)
-      .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
-      
-    // Handle modules without a publisher (if any)
-    const unknownPublisherModules = allModules
-      .filter(module => !module.publisher)
-      .sort((a, b) => a.name.localeCompare(b.name));
-      
-    // If there are any modules without a publisher, add them to third-party
-    if (unknownPublisherModules.length > 0) {
-      thirdPartyModules.push(...unknownPublisherModules);
-    }
-    
-    // Create categories only for non-empty publisher groups
-    const categories = [];
-    
-    if (microsoftModules.length > 0) {
-      categories.push({
-        name: 'Microsoft',
-        icon: ConnectorsIcon as any,
-        modules: microsoftModules
-      });
-    }
-    
-    if (thirdPartyModules.length > 0) {
-      categories.push({
-        name: 'Third-party Services',
-        icon: ConnectorsIcon as any,
-        modules: thirdPartyModules
-      });
-    }
-    
-    // Create a new structure with publishers as categories
+
+    // Sort all modules alphabetically by name
+    const sortedModules = allModules.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Group all connectors under a single 'Connectors' category
     return [{
       name: 'Connectors',
       icon: ConnectorsIcon as any,
-      categories: categories
+      categories: [{
+        name: 'Connectors',
+        icon: ConnectorsIcon as any,
+        modules: sortedModules
+      }]
     }];
   }, [connectorActions]);
   
@@ -175,13 +146,17 @@ const Sidebar = () => {
   
   // Use the appropriate sections for the current tab view (not for search)
   const activeTabSections = useMemo(() => {
-    if (activeNav === 'core') {
+    if (activeNav === 'all') {
+      // Combine both PAD actions and Connectors for the All tab
+      return [...modifiedCoreActions, ...appActions];
+    } else if (activeNav === 'core') {
       return modifiedCoreActions;
-    } else if (activeNav === 'connectors') { // Changed from 'apps' to 'connectors' to match navigation tabs
+    } else if (activeNav === 'connectors') {
       return appActions;
-    } else {
+    } else if (activeNav === 'favorites') {
       return [];
     }
+    return [];
   }, [activeNav, modifiedCoreActions, appActions]);
 
   const clearSearch = () => {
@@ -220,12 +195,7 @@ const Sidebar = () => {
     console.log('After setting - selectedLibraryTab:', tabToOpen);
   };
 
-  const toggleSubgroup = (subgroupName: string) => {
-    setExpandedSubgroups(prev => ({
-      ...prev,
-      [subgroupName]: !prev[subgroupName]
-    }));
-  };
+  
 
   const handleActionClick = (actionId: string) => {
     addToRecent(actionId);
@@ -244,7 +214,7 @@ const Sidebar = () => {
       <button
         key={item}
         onClick={() => handleActionClick(item)}
-        className="w-full pr-2 py-1.5 text-sm text-left hover:bg-gray-20 transition-colors flex items-center gap-2 group rounded-md pl-6"
+        className="w-full pr-2 py-1.5 text-sm text-left hover:bg-gray-20 transition-colors flex items-center gap-2 group rounded-md pl-[40px]"
       >
         <div className="flex items-center gap-2 flex-1 min-w-0 overflow-hidden">
           {/* Connector icons removed for consistency with Core PAD actions */}
@@ -1008,23 +978,21 @@ const Sidebar = () => {
       return renderSearchResults();
     }
     
-    if (activeSection) return renderSecondLevel();
     if (activeNav === 'favorites') return renderFavoritesView();
 
     // Get all categories from active tab sections
     let groups = activeTabSections.flatMap((source: any) => source.categories);
-    
-    // Sort categories alphabetically if this is the Core tab
-    if (activeNav === 'core') {
+
+    // Sort categories alphabetically and assign categoryName for color handling
+    if (activeNav === 'core' || activeNav === 'all') {
       groups = [...groups].sort((a, b) => a.name.localeCompare(b.name));
-      
-      // Additionally ensure that all modules within each category are also sorted alphabetically
-      // and add categoryName to each module for consistent color handling
+
+      // Assign categoryName to each module for consistent color handling
       groups = groups.map(group => ({
         ...group,
         modules: [...group.modules].map(module => ({
           ...module,
-          categoryName: group.name // Add the category name to each module
+          categoryName: group.name
         })).sort((a, b) => a.name.localeCompare(b.name))
       }));
     }
@@ -1102,109 +1070,78 @@ const Sidebar = () => {
             <div className="bg-white rounded-lg overflow-hidden p-2">
               <div>
                 {/* Sort modules alphabetically by name if this is the Core tab */}
-                {(activeNav === 'core' ? [...group.modules].sort((a, b) => a.name.localeCompare(b.name)) : group.modules).map((module: any) => (
-                  <div key={module.name}>
-                    <button
-                      className="w-full flex items-center gap-2 pl-2 pr-2 py-1.5 hover:bg-gray-20 transition-colors rounded-md"
-                      title={`Expand ${module.name}`}
-                      onClick={() => setActiveSection(module)}
-                    >
-                      {activeNav === 'connectors' ? (
-                        <ConnectorLogo 
-                          name={module.name} 
-                          size="small"
-                        />
-                      ) : (
-                        <ActionIcon 
-                          module={module}
-                          size="small"
-                        />
-                      )}
-                      <span className="text-sm text-gray-150 flex-1 text-left">{module.name}</span>
-                      <ChevronRight className="w-4 h-4 text-gray-130 ml-auto" />
-                    </button>
+                {(activeNav === 'core' ? [...group.modules].sort((a, b) => a.name.localeCompare(b.name)) : group.modules).map((module: any) => {
+  const isExpanded = expandedModules.includes(module.name);
+  return (
+    <div key={module.name}>
+      <button
+        className="w-full flex items-center gap-2 pl-2 pr-2 py-1.5 hover:bg-gray-20 transition-colors rounded-md"
+        title={isExpanded ? `Collapse ${module.name}` : `Expand ${module.name}`}
+        onClick={() => {
+          setExpandedModules(prev =>
+            prev.includes(module.name)
+              ? prev.filter(name => name !== module.name)
+              : [...prev, module.name]
+          );
+        }}
+      >
+        {activeNav === 'connectors' ? (
+          <ConnectorLogo
+            name={module.name}
+            size="small"
+          />
+        ) : module.source === 'Connector' ? (
+          <ConnectorLogo
+            name={module.name}
+            size="small"
+          />
+        ) : (
+          <ActionIcon
+            module={module}
+            size="small"
+          />
+        )}
+        <span className="text-sm text-gray-150 flex-1 text-left">{module.name}</span>
+        <ChevronRight
+          className={cn(
+            "w-4 h-4 text-gray-130 transition-transform ml-auto",
+            isExpanded && "transform rotate-90"
+          )}
+        />
+      </button>
+      {isExpanded && (
+        <div className="pt-1 pb-2">
+          {module.submodules?.length === 0 ? (
+            <div className="space-y-1">
+              {module.actions?.map(renderActionItem)}
+            </div>
+          ) : module.submodules?.length === 1 && module.submodules[0].name ? (
+            <div className="space-y-1">
+              {module.submodules[0].actions.map(renderActionItem)}
+            </div>
+          ) : (
+            module.submodules?.map((submodule: any) => (
+              <div key={submodule.name}>
+                {submodule.name && (
+                  <div className="flex items-center gap-2 pr-2 py-1.5 pl-[40px]">
+                    <span className="text-sm flex-1 text-left font-semibold" style={{ color: '#114AB0' }}>{submodule.name}</span>
                   </div>
-                ))}
+                )}
+                <div className="space-y-1">
+                  {submodule.actions.map(renderActionItem)}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+    </div>
+  );
+})}
               </div>
             </div>
           </div>
         ))}
-      </div>
-    );
-  };
-
-  const renderSecondLevel = () => {
-    if (!activeSection) return null;
-
-    // Check if there's only one submodule with a name
-    const hasOnlySingleSubgroup = activeSection.submodules?.length === 1 && activeSection.submodules[0].name;
-
-    return (
-      <div className="flex-1 overflow-y-auto bg-[#fafafa] px-3">
-        <div className="relative mb-6">
-          <div className="sticky top-0 z-10 bg-[#fafafa]">
-            <div className="flex items-center gap-2 py-2">
-              <button
-                onClick={() => setActiveSection(null)}
-                className="p-1 rounded-full hover:bg-gray-20 transition-colors"
-              >
-                <ChevronRight className="w-4 h-4 text-gray-130 transform rotate-180" />
-              </button>
-              <span className="text-sm font-semibold text-gray-190 text-left">{activeSection.name}</span>
-            </div>
-          </div>
-          <div className="bg-white rounded-lg overflow-hidden p-2">
-            <div>
-              {activeSection.submodules?.length === 0 ? (
-                <div className="space-y-1">
-                  {activeSection.actions?.map(renderActionItem)}
-                </div>
-              ) : hasOnlySingleSubgroup ? (
-                // If there's only one subgroup, show its actions directly
-                <div className="space-y-1">
-                  {activeSection.submodules[0].actions.map(renderActionItem)}
-                </div>
-              ) : (
-                // If there are multiple subgroups, keep the current behavior
-                activeSection.submodules.map((submodule: any) => (
-                  <div key={submodule.name}>
-                    {submodule.name ? (
-                      <>
-                        <button
-                          onClick={() => toggleSubgroup(submodule.name)}
-                          className="w-full flex items-center gap-2 pl-2 pr-2 py-1.5 hover:bg-gray-20 transition-colors rounded-md"
-                          title={`${expandedSubgroups[submodule.name] ? 'Collapse' : 'Expand'} ${submodule.name}`}
-                        >
-                          <ChevronRight 
-                            className={cn(
-                              "w-4 h-4 text-gray-130 transition-transform",
-                              expandedSubgroups[submodule.name] && "transform rotate-90"
-                            )} 
-                          />
-                          <span className="text-sm text-gray-150 flex-1 text-left">{submodule.name}</span>
-                          <div className="ml-auto">
-                            <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-gray-30 text-gray-110 text-xs">
-                              {submodule.actions.length}
-                            </span>
-                          </div>
-                        </button>
-                        {expandedSubgroups[submodule.name] && (
-                          <div className="ml-4">
-                            {submodule.actions.map(renderActionItem)}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="space-y-1">
-                        {submodule.actions.map(renderActionItem)}
-                      </div>
-                    )}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
       </div>
     );
   };
@@ -1220,7 +1157,7 @@ const Sidebar = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search across all actions"
             className={cn(
-              "w-full pl-8 pr-2.5 py-1.5 border border-gray-40 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] bg-white h-8",
+              "w-full pl-[40px] pr-2.5 py-1.5 border border-gray-40 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#0078d4] focus:border-[#0078d4] bg-white h-8",
               searchQuery ? "pr-8" : "pr-3"
             )}
             autoComplete="off"
@@ -1251,7 +1188,7 @@ const Sidebar = () => {
                     key={item.id}
                     onClick={() => {
                       setActiveNav(item.id);
-                      setActiveSection(null);
+
                     }}
                     className={cn(
                       "flex items-center justify-center px-2.5 h-7 rounded-full text-xs font-medium transition-all duration-200",
@@ -1321,23 +1258,21 @@ const Sidebar = () => {
       <div className="border-t border-gray-40 bg-[#fafafa] p-3">
         <div className="overflow-hidden">
           <button
-            onClick={() => setIsTemplatesModalOpen(true)}
             className="w-full flex items-center gap-2 pl-2 pr-2 py-1.5 hover:bg-gray-20 transition-colors rounded-md"
+            onClick={() => setIsTemplatesModalOpen(true)}
           >
             <LayoutTemplate className="w-4 h-4 text-gray-140" />
             <span className="text-sm text-gray-150 flex-1 text-left">Templates</span>
-            <ChevronRight className="w-4 h-4 text-gray-130 ml-auto" />
           </button>
           <button
+            className="w-full flex items-center gap-2 pl-2 pr-2 py-1.5 hover:bg-gray-20 transition-colors rounded-md"
             onClick={() => {
               setSelectedLibraryCategory(null);
               setIsLibraryModalOpen(true);
             }}
-            className="w-full flex items-center gap-2 pl-2 pr-2 py-1.5 hover:bg-gray-20 transition-colors rounded-md"
           >
-            <Package2 className="w-4 h-4 text-gray-140" />
+            <BookOpen className="w-4 h-4 text-gray-140" />
             <span className="text-sm text-gray-150 flex-1 text-left">Library</span>
-            <ChevronRight className="w-4 h-4 text-gray-130 ml-auto" />
           </button>
         </div>
       </div>
