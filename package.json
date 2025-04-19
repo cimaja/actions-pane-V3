@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://cimaja.github.io/actions-pane-V2",
+  "homepage": "https://cimaja.github.io/actions-pane-V3",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
