@@ -1,0 +1,89 @@
+.moduleGroup {
+  margin-bottom: 0;
+}
+
+.moduleHeader {
+  font-weight: 600;
+  font-size: 14px;
+  color: #444;
+  padding: 6px 8px;
+  border-radius: 6px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.moduleHeader:hover {
+  background: #f3f4f6;
+}
+
+.moduleArrow {
+  font-size: 16px;
+  color: #aaa;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.submoduleWrapper {
+  margin-bottom: 8px;
+}
+
+.submoduleName {
+  font-weight: 500;
+  font-size: 13px;
+  color: #666;
+  margin: 8px 0 4px 0;
+}
+
+.actionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 8px;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.actionItem:hover {
+  background: #f3f4f6;
+}
+
+.actionName {
+  font-size: 14px;
+  color: #222;
+  font-weight: 400;
+}
+
+.favoriteIcon {
+  font-size: 18px;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.favoriteIconActive {
+  color: #f7c948;
+  /* Always visible when active */
+  opacity: 1;
+}
+
+.favoriteIconInactive {
+  color: #ccc;
+  /* Hidden by default */
+  opacity: 0;
+}
+
+/* Show inactive star on hover */
+.actionItem:hover .favoriteIconInactive {
+  opacity: 1;
+}

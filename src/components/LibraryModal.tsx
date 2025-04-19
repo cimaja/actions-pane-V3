@@ -21,7 +21,7 @@ interface LibraryModalProps {
   initialTab?: Tab;
 }
 
-type Tab = 'core' | 'connectors' | 'custom-actions' | 'ui-collections';
+type Tab = 'core' | 'connectors' | 'custom-actions' | 'ui-collections' | 'favorites';
 type SortType = 'name' | 'author' | 'category' | 'publisher';
 type View = 'list' | 'details';
 
@@ -86,7 +86,7 @@ const LibraryModal = ({ isOpen, onClose, initialCategory, initialTab = 'core' }:
   console.log('LibraryModal opening with initialTab:', initialTab, 'initialCategory:', initialCategory);
   
   // Initialize the active tab with the initialTab prop
-  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab || 'core');
   
   // Update activeTab when initialTab changes
   useEffect(() => {
@@ -95,6 +95,8 @@ const LibraryModal = ({ isOpen, onClose, initialCategory, initialTab = 'core' }:
       setActiveTab(initialTab);
     }
   }, [isOpen, initialTab]);
+  
+
   
   // Listen for the library-select-module custom event
   useEffect(() => {
@@ -221,6 +223,24 @@ const LibraryModal = ({ isOpen, onClose, initialCategory, initialTab = 'core' }:
 
     return modulesWithCategories;
   }, [sources, activeTab]);
+  
+  // Navigate directly to details page when initialCategory is provided
+  useEffect(() => {
+    if (isOpen && initialCategory && modules.length > 0) {
+      // Find the module that matches the initialCategory
+      const moduleToSelect = modules.find(module => module.name === initialCategory);
+      
+      if (moduleToSelect) {
+        // Set the selected module
+        setSelectedModule({
+          ...moduleToSelect,
+          category: moduleToSelect.categoryName || (activeTab === 'core' ? 'Core' : 'Connectors')
+        });
+        // Switch to details view
+        setCurrentView('details');
+      }
+    }
+  }, [isOpen, initialCategory, modules, activeTab]);
 
   const filteredAndSortedModules = useMemo(() => {
     // Make sure we have modules to work with

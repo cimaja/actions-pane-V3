@@ -94,131 +94,34 @@ export const LadybugNotification: React.FC = () => {
             <h3 className="text-sm font-semibold mb-1 text-gray-800">What's New</h3>
             <p className="text-xs text-gray-600 mb-1">Latest updates and improvements</p>
             <div data-component-name="LadybugNotification">
-              {/* Version 2.6.0 - Current */}
+              {/* Version 1.0 - Current */}
               <div className="bg-white py-3 mb-3">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-gray-800">Version 2.6.0</p>
-                  <p className="text-xs text-gray-500">April 4, 2025</p>
+                  <p className="text-sm font-semibold text-gray-800">Version 1.0</p>
+                  <p className="text-xs text-gray-500">April 20, 2025</p>
                 </div>
                 <div className="mb-3">
                   <div className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Icon System Overhaul</p>
+                    <p className="text-sm font-medium text-gray-800">Sidebar Foundation</p>
                   </div>
-                  <p className="text-xs text-gray-600 ml-4">Replaced all Lucide icons with Fluent UI icons for a consistent visual experience</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Improved Maintainability</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Simplified icon management by using a single icon library throughout the application</p>
-                </div>
-              </div>
-              
-              {/* Version 2.5.0 */}
-              <div className="bg-white py-3 mb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-gray-800">Version 2.5.0</p>
-                  <p className="text-xs text-gray-500">March 26, 2025</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Favorites Display</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Improved favorites view to display each module with its specific name and proper icon</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Custom Actions</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Fixed custom actions appearing in sidebar and added support for favoriting custom actions</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Connector Images</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Fixed image loading for all connectors with improved fallbacks and consistent display</p>
+                  <p className="text-xs text-gray-600 ml-4">Implemented core sidebar structure with module-based navigation and search functionality</p>
                 </div>
 
+                <div className="mb-3">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                    <p className="text-sm font-medium text-gray-800">Library Integration</p>
+                  </div>
+                  <p className="text-xs text-gray-600 ml-4">Direct navigation to module details from search results with consistent visual styling</p>
+                </div>
 
-              </div>
-              
-              {/* Version 2.4.0 */}
-              <div className="bg-white py-3 mb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-gray-800">Version 2.4.0</p>
-                  <p className="text-xs text-gray-500">March 25, 2025</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">UI Improvements</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Cleaner template cards with improved spacing and layout</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">White Background</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Updated modal backgrounds for better contrast and readability</p>
-                </div>
                 <div>
                   <div className="flex items-center">
                     <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Simplified Templates</p>
+                    <p className="text-sm font-medium text-gray-800">Favorites System</p>
                   </div>
-                  <p className="text-xs text-gray-600 ml-4">Removed redundant elements for a more focused experience</p>
-                </div>
-              </div>
-              
-
-              
-              {/* Version 2.3.0 */}
-              <div className="bg-white py-3 mb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-semibold text-gray-800">Version 2.3.0</p>
-                  <p className="text-xs text-gray-500">March 4, 2025</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">New Feature</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Added support for custom action categories</p>
-                </div>
-                <div>
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">UI Enhancements</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4">Improved action icons and visual hierarchy</p>
-                </div>
-              </div>
-              
-              {/* Version 2.2.5 */}
-              <div className="bg-white py-3 mb-3" data-component-name="LadybugNotification">
-                <div className="flex items-center justify-between mb-2" data-component-name="LadybugNotification">
-                  <p className="text-sm font-semibold text-gray-800">Version 2.2.5</p>
-                  <p className="text-xs text-gray-500" data-component-name="LadybugNotification">February 25, 2025</p>
-                </div>
-                <div className="mb-3">
-                  <div className="flex items-center" data-component-name="LadybugNotification">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800">Left Pane Layout</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4" data-component-name="LadybugNotification">Improved navigation sidebar with better category organization</p>
-                </div>
-                <div>
-                  <div className="flex items-center" data-component-name="LadybugNotification">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                    <p className="text-sm font-medium text-gray-800" data-component-name="LadybugNotification">Filter Controls</p>
-                  </div>
-                  <p className="text-xs text-gray-600 ml-4" data-component-name="LadybugNotification">Enhanced filtering options in the left navigation panel</p>
+                  <p className="text-xs text-gray-600 ml-4">Implemented star-based favorites with hover visibility for a cleaner interface</p>
                 </div>
               </div>
             </div>

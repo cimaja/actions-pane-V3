@@ -64,7 +64,7 @@ export const ActionIcon: React.FC<ActionIconProps> = ({
   const categoryName = module.categoryName || module.category || '';
   
   // Use the centralized configuration to get the color class
-  let colorClass = getCategoryColorClasses(categoryName);
+  const colorClass = getCategoryColorClasses(categoryName);
   
   // Add debug logging to help identify category name issues
   console.log(`ActionIcon: module=${module.name}, categoryName=${categoryName}, color=${colorClass}`);

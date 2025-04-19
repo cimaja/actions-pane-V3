@@ -25,6 +25,7 @@ export interface ActionModule {
   publisher?: string;
   category?: string;
   lastUpdated?: string;
+  tags?: string[];
 }
 
 export interface ActionSubmodule {
@@ -44,6 +45,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-yellow-100 text-yellow-600',
         modules: [
           {
+            tags: ['built-in'],
             name: 'Date time',
             icon: CommonIcons.clock,
             color: 'bg-blue-100 text-blue-600',
@@ -59,6 +61,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Files',
             icon: CommonIcons.fileText,
             color: 'bg-yellow-100 text-yellow-600',
@@ -87,6 +90,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Folders',
             icon: CommonIcons.folder,
             color: 'bg-blue-100 text-blue-600',
@@ -109,6 +113,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'PDF',
             icon: CommonIcons.filePdf,
             color: 'bg-red-100 text-red-600',
@@ -133,6 +138,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-rose-100 text-rose-600',
         modules: [
           {
+            tags: ['built-in'],
             name: 'Browser Automation',
             icon: CommonIcons.globe,
             color: 'bg-blue-100 text-blue-600',
@@ -160,6 +166,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'UI Automation',
             icon: CommonIcons.monitorSmartphone,
             color: 'bg-rose-100 text-rose-600',
@@ -202,6 +209,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Message boxes',
             icon: CommonIcons.messageSquare,
             color: 'bg-indigo-100 text-indigo-600',
@@ -221,6 +229,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Mouse and keyboard',
             icon: CommonIcons.keyboard,
             color: 'bg-slate-100 text-slate-600',
@@ -252,6 +261,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-slate-100 text-slate-600',
         modules: [
           {
+            tags: ['built-in'],
             name: 'Clipboard',
             icon: CommonIcons.clipboard,
             color: 'bg-amber-100 text-amber-600',
@@ -267,6 +277,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Workstation Control',
             icon: CommonIcons.monitor,
             color: 'bg-slate-100 text-slate-600',
@@ -292,6 +303,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Environment Settings',
             icon: CommonIcons.settings,
             color: 'bg-emerald-100 text-emerald-600',
@@ -307,6 +319,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Process Management',
             icon: CommonIcons.terminal,
             color: 'bg-violet-100 text-violet-600',
@@ -331,6 +344,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-blue-100 text-blue-600',
         modules: [
           {
+            tags: ['built-in'],
             name: 'Conditionals',
             icon: CommonIcons.network,
             color: 'bg-blue-100 text-blue-600',
@@ -349,6 +363,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Flow control',
             icon: CommonIcons.messageSquareCode,
             color: 'bg-purple-100 text-purple-600',
@@ -374,6 +389,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Loops',
             icon: CommonIcons.repeat,
             color: 'bg-green-100 text-green-600',
@@ -391,6 +407,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Variables',
             icon: CommonIcons.variable,
             color: 'bg-indigo-100 text-indigo-600',
@@ -413,6 +430,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-slate-100 text-slate-600',
         modules: [
           {
+            tags: ['built-in'],
             name: 'Scripting',
             icon: CommonIcons.code,
             color: 'bg-purple-100 text-purple-600',
@@ -431,6 +449,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Cryptography',
             icon: CommonIcons.lock,
             color: 'bg-green-100 text-green-600',
@@ -451,6 +470,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Windows services',
             icon: CommonIcons.command,
             color: 'bg-blue-100 text-blue-600',
@@ -469,6 +489,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'XML',
             icon: CommonIcons.xml,
             color: 'bg-orange-100 text-orange-600',
@@ -491,6 +512,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'CMD session',
             icon: CommonIcons.terminal,
             color: 'bg-gray-100 text-gray-600',
@@ -508,6 +530,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Terminal emulation',
             icon: CommonIcons.terminal,
             color: 'bg-slate-100 text-slate-600',
@@ -528,6 +551,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'FTP',
             icon: CommonIcons.ftp,
             color: 'bg-indigo-100 text-indigo-600',
@@ -562,6 +586,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-purple-100 text-purple-600',
         modules: [
           {
+            tags: ['built-in'],
             name: 'Access',
             icon: CommonIcons.database,
             color: 'bg-blue-100 text-blue-600',
@@ -579,6 +604,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Active Directory',
             icon: CommonIcons.users,
             color: 'bg-green-100 text-green-600',
@@ -616,6 +642,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'AI Builder',
             icon: CommonIcons.brainCircuit,
             color: 'bg-indigo-100 text-indigo-600',
@@ -629,6 +656,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Azure',
             icon: CommonIcons.cloud,
             color: 'bg-blue-100 text-blue-600',
@@ -655,6 +683,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'CyberArk',
             icon: CommonIcons.key,
             color: 'bg-red-100 text-red-600',
@@ -668,6 +697,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Email',
             icon: CommonIcons.mail,
             color: 'bg-amber-100 text-amber-600',
@@ -683,6 +713,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Excel',
             icon: CommonIcons.spreadsheet,
             color: 'bg-green-100 text-green-600',
@@ -739,6 +770,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Exchange Server',
             icon: CommonIcons.mailbox,
             color: 'bg-blue-100 text-blue-600',
@@ -755,6 +787,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Google Cognitive',
             icon: CommonIcons.eye,
             color: 'bg-red-100 text-red-600',
@@ -781,6 +814,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Microsoft Cognitive',
             icon: CommonIcons.brainCircuit,
             color: 'bg-purple-100 text-purple-600',
@@ -809,6 +843,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Outlook',
             icon: CommonIcons.mail,
             color: 'bg-blue-100 text-blue-600',
@@ -828,6 +863,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'SQL',
             icon: CommonIcons.database,
             color: 'bg-amber-100 text-amber-600',
@@ -843,6 +879,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['built-in'],
             name: 'Work queues',
             icon: CommonIcons.clipboard,
             color: 'bg-indigo-100 text-indigo-600',
@@ -876,6 +913,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-blue-100 text-blue-600',
         modules: [
           {
+            tags: ['connector'],
             name: 'Azure Blob Storage',
             icon: CommonIcons.database,
             color: 'bg-blue-100 text-blue-600',
@@ -906,6 +944,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Azure DevOps',
             icon: CommonIcons.code,
             color: 'bg-blue-100 text-blue-600',
@@ -941,6 +980,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Azure Key Vault',
             icon: CommonIcons.lock,
             color: 'bg-blue-100 text-blue-600',
@@ -974,6 +1014,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Azure OpenAI',
             icon: CommonIcons.brainCircuit,
             color: 'bg-blue-100 text-blue-600',
@@ -997,6 +1038,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Bing Maps',
             icon: CommonIcons.globe,
             color: 'bg-blue-100 text-blue-600',
@@ -1025,6 +1067,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Excel Online (Business)',
             icon: CommonIcons.spreadsheet,
             color: 'bg-green-100 text-green-600',
@@ -1054,6 +1097,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Microsoft Forms',
             icon: CommonIcons.form,
             color: 'bg-purple-100 text-purple-600',
@@ -1072,6 +1116,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Microsoft Teams',
             icon: CommonIcons.teams,
             color: 'bg-purple-100 text-purple-600',
@@ -1117,6 +1162,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Microsoft To Do',
             icon: CommonIcons.clipboard,
             color: 'bg-blue-100 text-blue-600',
@@ -1145,6 +1191,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Office 365 Outlook',
             icon: CommonIcons.mail,
             color: 'bg-blue-100 text-blue-600',
@@ -1195,6 +1242,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'OneDrive for Business',
             icon: CommonIcons.hardDrive,
             color: 'bg-blue-100 text-blue-600',
@@ -1234,6 +1282,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'OneNote',
             icon: CommonIcons.fileText,
             color: 'bg-purple-100 text-purple-600',
@@ -1267,6 +1316,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Planner',
             icon: CommonIcons.clipboard,
             color: 'bg-blue-100 text-blue-600',
@@ -1299,6 +1349,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Power BI',
             icon: CommonIcons.chart,
             color: 'bg-yellow-100 text-yellow-600',
@@ -1329,6 +1380,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'SharePoint',
             icon: CommonIcons.fileText,
             color: 'bg-blue-100 text-blue-600',
@@ -1386,6 +1438,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'SQL Server',
             icon: CommonIcons.database,
             color: 'bg-blue-100 text-blue-600',
@@ -1410,6 +1463,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Word Online (Business)',
             icon: CommonIcons.word,
             color: 'bg-blue-100 text-blue-600',
@@ -1436,6 +1490,7 @@ export const actionSources: ActionSource[] = [
         color: 'bg-purple-100 text-purple-600',
         modules: [
           {
+            tags: ['connector'],
             name: 'Adobe PDF Tools',
             icon: CommonIcons.filePdf,
             color: 'bg-red-100 text-red-600',
@@ -1466,6 +1521,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Adobe Sign',
             icon: CommonIcons.fileText,
             color: 'bg-red-100 text-red-600',
@@ -1497,6 +1553,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Bitly',
             icon: CommonIcons.linkIcon,
             color: 'bg-orange-100 text-orange-600',
@@ -1526,6 +1583,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Box',
             icon: CommonIcons.folder,
             color: 'bg-blue-100 text-blue-600',
@@ -1564,6 +1622,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Dropbox',
             icon: CommonIcons.hardDrive,
             color: 'bg-blue-100 text-blue-600',
@@ -1599,6 +1658,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'GitHub',
             icon: CommonIcons.git,
             color: 'bg-gray-100 text-gray-600',
@@ -1642,6 +1702,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Google Calendar',
             icon: CommonIcons.calendar,
             color: 'bg-red-100 text-red-600',
@@ -1679,6 +1740,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Google Drive',
             icon: CommonIcons.hardDrive,
             color: 'bg-green-100 text-green-600',
@@ -1724,6 +1786,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Google Sheets',
             icon: CommonIcons.spreadsheet,
             color: 'bg-green-100 text-green-600',
@@ -1764,6 +1827,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Google Tasks',
             icon: CommonIcons.clipboard,
             color: 'bg-green-100 text-green-600',
@@ -1794,6 +1858,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Jira',
             icon: CommonIcons.clipboard,
             color: 'bg-blue-100 text-blue-600',
@@ -1833,6 +1898,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'LinkedIn',
             icon: CommonIcons.linkedinIcon,
             color: 'bg-blue-100 text-blue-600',
@@ -1872,6 +1938,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'Salesforce',
             icon: CommonIcons.cloud,
             color: 'bg-blue-100 text-blue-600',
@@ -1918,6 +1985,7 @@ export const actionSources: ActionSource[] = [
             ]
           },
           {
+            tags: ['connector'],
             name: 'SAP',
             icon: CommonIcons.database,
             color: 'bg-blue-100 text-blue-600',

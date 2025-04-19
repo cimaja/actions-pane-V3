@@ -1,6 +1,4 @@
 import type { LucideIcon } from 'lucide-react';
-import ConnectorsIcon from '../components/icons/ConnectorsIcon';
-import CoreIcon from '../components/icons/CoreIcon';
 import FavoritesIcon from '../components/icons/FavoritesIcon';
 
 export interface NavItem {
@@ -9,11 +7,10 @@ export interface NavItem {
   icon: LucideIcon;
 }
 
-import { Package2 } from 'lucide-react';
+import { Package2, Plug } from 'lucide-react';
 
 export const mainNavItems: NavItem[] = [
-  { id: 'all', label: 'All', icon: Package2 },
-  { id: 'core', label: 'Built-in', icon: CoreIcon },
-  { id: 'connectors', label: 'Connectors', icon: ConnectorsIcon },
+  { id: 'core', label: 'Built-in', icon: Package2 },
+  { id: 'connectors', label: 'Connectors', icon: Plug },
   { id: 'favorites', label: 'Favorites', icon: FavoritesIcon },
 ];
