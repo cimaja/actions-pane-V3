@@ -10,15 +10,23 @@ interface SidebarLibraryResultsProps {
   builtInLibraryResults: React.ReactNode[];
   connectorLibraryResults: React.ReactNode[];
   show: boolean;
+  totalLibraryCount?: number;
 }
 
-const SidebarLibraryResults: React.FC<SidebarLibraryResultsProps> = ({ builtInLibraryResults, connectorLibraryResults, show }) => {
+const SidebarLibraryResults: React.FC<SidebarLibraryResultsProps> = ({ builtInLibraryResults, connectorLibraryResults, show, totalLibraryCount = 0 }) => {
   if (!show) return null;
+  
   return (
     <>
-      <div style={{ textAlign: 'left', margin: '16px 0', color: '#888', fontSize: 14, paddingLeft: 8 }}>Showing results from the library</div>
-      {builtInLibraryResults}
-      {connectorLibraryResults}
+      <div style={{ textAlign: 'left', margin: '16px 0', color: '#888', fontSize: 14, paddingLeft: 8 }}>
+        {totalLibraryCount === 0 ? 'No results found in the Library' : 'Showing results from the library'}
+      </div>
+      {totalLibraryCount > 0 && (
+        <>
+          {builtInLibraryResults}
+          {connectorLibraryResults}
+        </>
+      )}
     </>
   );
 };

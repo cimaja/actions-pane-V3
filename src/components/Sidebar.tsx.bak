@@ -274,25 +274,17 @@ const Sidebar: React.FC = () => {
                   ) : (
                     <>
                       {/* Local (installed) results */}
-                      {(localResults.length === 0 || (sidebar.selectedTag === 'Favorites' && !localResults.some(item => item != null))) && (
+                      {localResults.length === 0 && (
                         <div className="text-center">
                           <div className="mb-3">
                             <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-30">
-                              {sidebar.selectedTag === 'Favorites' ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-6 h-6 text-gray-110">
-                                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                                </svg>
-                              ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search w-6 h-6 text-gray-110">
-                                  <circle cx="11" cy="11" r="8"></circle>
-                                  <path d="m21 21-4.3-4.3"></path>
-                                </svg>
-                              )}
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search w-6 h-6 text-gray-110">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                              </svg>
                             </div>
                           </div>
-                          <h3 className="text-sm font-medium text-gray-190 mb-4">
-                            {sidebar.selectedTag === 'Favorites' ? 'No favorite results found' : 'No results found'}
-                          </h3>
+                          <h3 className="text-sm font-medium text-gray-190 mb-4">No results found</h3>
                         </div>
                       )}
                       {/* Use SidebarModuleList for installed results */}
@@ -318,8 +310,8 @@ const Sidebar: React.FC = () => {
                         </div>
                       )}
                       
-                      {/* Always show "No results found" message when there are no library results but user has searched */}
-                      {(totalLibraryCount === 0 && sidebar.searchQuery.trim() !== '') && (
+                      {/* Show "No results found" message when there are no library results but user has searched */}
+                      {(!sidebar.showLibraryResults && totalLibraryCount === 0 && sidebar.searchQuery.trim() !== '') && (
                         <div style={{ textAlign: 'left', margin: '16px 0', color: '#888', fontSize: 14, paddingLeft: 8 }}>
                           No results found in the Library
                         </div>
@@ -344,12 +336,10 @@ const Sidebar: React.FC = () => {
               {/* Check if there are any favorites */}
               {sidebar.favoriteActions.size === 0 ? (
                 <div className="text-center">
-                  <div className="mb-3">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="w-6 h-6 text-gray-110">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                      </svg>
-                    </div>
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-30 mb-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-110">
+                      <path d="M10.7878 3.10215C11.283 2.09877 12.7138 2.09876 13.209 3.10215L15.567 7.87987L20.8395 8.64601C21.9468 8.80691 22.3889 10.1677 21.5877 10.9487L17.7724 14.6676L18.6731 19.9189C18.8622 21.0217 17.7047 21.8627 16.7143 21.342L11.9984 18.8627L7.28252 21.342C6.29213 21.8627 5.13459 21.0217 5.32374 19.9189L6.2244 14.6676L2.40916 10.9487C1.60791 10.1677 2.05005 8.80691 3.15735 8.64601L8.42988 7.87987L10.7878 3.10215ZM11.9984 4.03854L9.74008 8.61443C9.54344 9.01288 9.16332 9.28904 8.72361 9.35294L3.67382 10.0867L7.32788 13.6486C7.64606 13.9587 7.79125 14.4055 7.71614 14.8435L6.85353 19.8729L11.3702 17.4983C11.7635 17.2915 12.2333 17.2915 12.6266 17.4983L17.1433 19.8729L16.2807 14.8435C16.2056 14.4055 16.3508 13.9587 16.6689 13.6486L20.323 10.0867L15.2732 9.35294C14.8335 9.28904 14.4534 9.01288 14.2568 8.61443L11.9984 4.03854Z" fill="currentColor"></path>
+                    </svg>
                   </div>
                   <h3 className="text-sm font-medium text-gray-190 mb-4">No favorites yet</h3>
                 </div>
@@ -445,16 +435,15 @@ const Sidebar: React.FC = () => {
                                               {isFav ? '★' : '☆'}
                                             </span>
                                           </li>
-                                          );
-                                        })}
-                                      </ul>
-                                    ))}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })
-                    )
+                                        );
+                                      })}
+                                    </ul>
+                                  ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })
                   )
                 )}
             </React.Fragment>
