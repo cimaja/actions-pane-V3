@@ -1,0 +1,49 @@
+.footerContainer {
+  border-top: 1px solid #e5e7eb;
+  background: #fafafa;
+  padding: 12px;
+}
+
+.footerButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.footerButton:not(:first-child) {
+  margin-top: 4px;
+}
+
+.footerButton:hover {
+  background: #f3f4f6;
+}
+
+.footerButtonIcon {
+  width: 20px;
+  height: 20px;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.footerButtonLabel {
+  font-size: 14px;
+  color: #444;
+  flex: 1;
+  text-align: left;
+}
+
+.footerButtonChevron {
+  width: 16px;
+  height: 16px;
+  color: #aaa;
+  margin-left: auto;
+  flex-shrink: 0;
+}
