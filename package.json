@@ -1,8 +1,8 @@
 {
-  "name": "actions-pane-v4",
+  "name": "actions-pane-v3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cimaja.github.io/actions-pane-V4/",
+  "homepage": "https://cimaja.github.io/actions-pane-V3/",
   "description": "Prototype for the redesigned Actions Pane in Power Automate Desktop",
   "scripts": {
     "start": "react-scripts start",
